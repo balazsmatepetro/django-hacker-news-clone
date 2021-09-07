@@ -1,0 +1,21 @@
+{% load humanize %}
+
+<article class="mb-4">
+    <a class="d-inline-block" href="{{ news_item.url }}" target="_blank">
+        <h2 class="fs-5">{{ news_item.title }}</h2>
+    </a>
+
+    <div class="fs-6">
+        <span>0 points by</span>
+
+        <a href="#">{{ news_item.author.username }}</a>
+
+        <time datetime="{{ news_item.created_at|date:"Y-m-d" }}T{{ news_item.created_at|date:"H:i:s" }}">
+            {{ news_item.created_at|naturaltime }} ago
+        </time>
+
+        <span>| hide |</span>
+
+        <a href="#">0 comments</a>
+    </div>
+</article>
