@@ -12,3 +12,16 @@ class NewsItem(models.Model):
     def __str__(self):
         return f'{self.title} ({Truncator(text=self.url).chars(num=64)})'
 
+
+class Comment(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
+    news_item = models.ForeignKey(NewsItem, on_delete=models.CASCADE)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def has_replies(self):
+        return self.comment_set.count() > 0
+
+    def get_replies(self):
+        return self.comment_set.filter(parent=self).all()

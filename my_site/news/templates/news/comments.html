@@ -6,4 +6,8 @@
 
 {% block content %}
     {% include 'news/partial/news_item.html' with news_item=news_item %}
+
+    <div>
+        {% include 'news/partial/comments.html' with comments=comments %}
+    </div>
 {% endblock %}

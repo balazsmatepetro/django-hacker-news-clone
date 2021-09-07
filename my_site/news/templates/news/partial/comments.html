@@ -1,0 +1,19 @@
+{% if comments|length > 0 %}
+    <div class="ms-4">
+        {% for comment in comments %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <p class="card-text mb-1">{{ comment.content }}</p>
+
+                    <a class="card-link" href="#">Reply</a>
+                </div>
+            </div>
+
+            {% if comment.has_replies %}
+                {% include 'news/partial/comments.html' with comments=comment.get_replies %}
+            {% endif %}
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="alert alert-primary">There are no comments yet.</div>
+{% endif %}
