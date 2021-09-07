@@ -5,5 +5,6 @@ from . import views
 app_name = 'news'
 
 urlpatterns = [
-    path('', views.index, name='index')
+    path('', views.index, name='index'),
+    path('<int:news_item_id>/comments/', views.comments, name='comments'),
 ]

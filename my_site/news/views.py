@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 
 from .models import NewsItem
 
@@ -8,4 +8,12 @@ def index(request):
 
     return render(request, 'news/index.html', {
         'news': latest_news,
+    })
+
+
+def comments(request, news_item_id):
+    news_item = get_object_or_404(NewsItem, pk=news_item_id)
+
+    return render(request, 'news/comments.html', {
+        'news_item': news_item,
     })

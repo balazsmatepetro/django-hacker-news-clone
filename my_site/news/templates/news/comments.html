@@ -1,0 +1,9 @@
+{% extends 'news/partial/layout.html' %}
+
+{% load static %}
+
+{% block title %}Hacker News Clone &dash; {{ news_item.title }}{% endblock %}
+
+{% block content %}
+    {% include 'news/partial/news_item.html' with news_item=news_item %}
+{% endblock %}
