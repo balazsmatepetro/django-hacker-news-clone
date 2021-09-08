@@ -1,6 +1,7 @@
-from django.contrib.auth.models import User
 from django.db import models
 from django.utils.text import Truncator
+
+from accounts.models import User
 
 
 class NewsItem(models.Model):
