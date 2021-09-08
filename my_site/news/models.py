@@ -9,6 +9,10 @@ class NewsItem(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    @staticmethod
+    def get_news_items_by_term(search_term: str):
+        return NewsItem.objects.order_by('-created_at').filter(title__icontains=search_term)
+
     def get_number_of_comments(self):
         return self.comment_set.count()
 
