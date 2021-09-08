@@ -1,0 +1,9 @@
+{% extends 'news/partial/layout.html' %}
+
+{% block title %}Hacker News Clone &dash; Logout{% endblock %}
+
+{% block content %}
+    <div class="alert alert-info">You&apos;ve successfully logged out!</div>
+
+    <p>Would you like to login again? Please click <a href="{% url 'accounts:login' %}">here</a>.</p>
+{% endblock %}

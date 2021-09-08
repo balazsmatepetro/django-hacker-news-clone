@@ -1,0 +1,45 @@
+{% extends 'news/partial/layout.html' %}
+
+{% block title %}Hacker News Clone &dash; Login{% endblock %}
+
+{% block content %}
+    {% if form.non_field_errors %}
+        {% include 'accounts/partial/form_errors.html' with errors=form.non_field_errors %}
+    {% endif %}
+
+    <div class="card">
+        <div class="card-header">Login</div>
+
+        <div class="card-body">
+            <form action="{% url 'accounts:login' %}" method="POST" novalidate>
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label for="{{ form.username.id_for_label }}" class="form-label">{{ form.username.label }}</label>
+
+                    {{ form.username }}
+
+                    {% if form.username.errors %}
+                        {% include 'accounts/partial/field_errors.html' with errors=form.username.errors %}
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    <label for="{{ form.password.id_for_label }}" class="form-label">{{ form.password.label }}</label>
+
+                    {{ form.password }}
+
+                    {% if form.password.errors %}
+                        {% include 'accounts/partial/field_errors.html' with errors=form.password.errors %}
+                    {% endif %}
+                </div>
+
+                <button class="btn btn-primary">Login</button>
+            </form>
+        </div>
+
+        <div class="card-footer">
+            Don&apos;t have an account yet? <a href="#">Sign up!</a>
+        </div>
+    </div>
+{% endblock %}
