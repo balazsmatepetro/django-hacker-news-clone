@@ -5,6 +5,12 @@
 {% block title %}Hacker News Clone &dash; News{% endblock %}
 
 {% block content %}
+    {% if messages %}
+        <div class="mb-4">
+            {% include 'accounts/partial/messages.html' with messages=messages %}
+        </div>
+    {% endif %}
+
     <ol>
         {% for news_item in news %}
             <li>

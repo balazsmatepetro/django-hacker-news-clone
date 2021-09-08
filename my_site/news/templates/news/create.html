@@ -1,0 +1,33 @@
+{% extends 'news/partial/layout.html' %}
+
+{% block title %}Hacker News Clone &dash; Submit{% endblock %}
+
+{% block content %}
+    <form action="{% url 'news:create' %}" method="POST" novalidate>
+        {% csrf_token %}
+
+        {{ form.errors }}
+
+        <div class="mb-3">
+            <label for="{{ form.title.id_for_label }}">Title</label>
+
+            {{ form.title }}
+            
+            {% if form.title.errors %}
+                {% include 'accounts/partial/field_errors.html' with errors=form.title.errors %}
+            {% endif %}
+        </div>
+
+        <div class="mb-3">
+            <label for="{{ form.url.id_for_label }}">URL</label>
+
+            {{ form.url }}
+
+            {% if form.url.errors %}
+                {% include 'accounts/partial/field_errors.html' with errors=form.url.errors %}
+            {% endif %}
+        </div>
+
+        <button class="btn btn-primary">Submit</button>
+    </form>
+{% endblock %}

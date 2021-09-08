@@ -1,5 +1,9 @@
-from django.shortcuts import get_object_or_404, render
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404, redirect, render
+from django.utils.translation import gettext_lazy as _
 
+from .forms import SubmitForm
 from .models import NewsItem
 
 
@@ -22,4 +26,25 @@ def comments(request, news_item_id):
     return render(request, 'news/comments.html', {
         'comments': news_item.comment_set.filter(parent=None).all(),
         'news_item': news_item,
+    })
+
+
+@login_required
+def create(request):
+    if request.method == 'POST':
+        form = SubmitForm(request.POST)
+
+        if form.is_valid():
+            created_item = form.save(commit=False)
+            created_item.author = request.user
+            created_item.save()
+
+            messages.success(request, _('You\'ve successfully submitted a post!'))
+
+            return redirect('news:index')
+    else:
+        form = SubmitForm()
+
+    return render(request, 'news/create.html', {
+        'form': form,
     })
