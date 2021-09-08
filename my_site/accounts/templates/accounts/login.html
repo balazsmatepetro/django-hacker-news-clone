@@ -3,6 +3,12 @@
 {% block title %}Hacker News Clone &dash; Login{% endblock %}
 
 {% block content %}
+    {% if messages %}
+        <div class="mb-4">
+            {% include 'accounts/partial/messages.html' with messages=messages %}
+        </div>
+    {% endif %}
+
     {% if form.non_field_errors %}
         {% include 'accounts/partial/form_errors.html' with errors=form.non_field_errors %}
     {% endif %}
@@ -39,7 +45,7 @@
         </div>
 
         <div class="card-footer">
-            Don&apos;t have an account yet? <a href="#">Sign up!</a>
+            Don&apos;t have an account yet? <a href="{% url 'accounts:register' %}">Sign up!</a>
         </div>
     </div>
 {% endblock %}

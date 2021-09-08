@@ -1,0 +1,55 @@
+{% extends 'news/partial/layout.html' %}
+
+{% block title %}Hacker News Clone &dash; Register{% endblock %}
+
+{% block content %}
+    {% if form.non_field_errors %}
+        {% include 'accounts/partial/form_errors.html' with errors=form.non_field_errors %}
+    {% endif %}
+
+    <div class="card">
+        <div class="card-header">Registration</div>
+
+        <div class="card-body">
+            <form action="{% url 'accounts:register' %}" method="POST" novalidate>
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label for="{{ form.username.id_for_label }}" class="form-label">{{ form.username.label }}</label>
+
+                    {{ form.username }}
+
+                    {% if form.username.errors %}
+                        {% include 'accounts/partial/field_errors.html' with errors=form.username.errors %}
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    <label for="{{ form.password1.id_for_label }}" class="form-label">{{ form.password1.label }}</label>
+
+                    {{ form.password1 }}
+
+                    {% if form.password1.errors %}
+                        {% include 'accounts/partial/field_errors.html' with errors=form.password1.errors %}
+                    {% endif %}
+                </div>
+            
+                <div class="mb-3">
+                    <label for="{{ form.password2.id_for_label }}" class="form-label">{{ form.password2.label }}</label>
+
+                    {{ form.password2 }}
+
+                    {% if form.password2.errors %}
+                        {% include 'accounts/partial/field_errors.html' with errors=form.password2.errors %}
+                    {% endif %}
+                </div>
+
+                <button class="btn btn-primary">Login</button>
+            </form>
+        </div>
+
+        <div class="card-footer">
+            Already have an account? <a href="{% url 'accounts:login' %}">Sign in!</a>
+        </div>
+    </div>
+{% endblock %}

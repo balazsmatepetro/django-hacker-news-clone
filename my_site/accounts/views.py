@@ -1,11 +1,10 @@
 from django.contrib.auth.views import LoginView as BaseLoginView, LogoutView as BaseLogoutView
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
-from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.utils.translation import gettext_lazy as _
 
-from .forms import LoginForm, ProfileForm
+from .forms import LoginForm, ProfileForm, RegisterForm
 
 
 class LoginView(BaseLoginView):
@@ -38,5 +37,20 @@ def index(request):
     })
 
 
+@user_passes_test(test_func=lambda user: not user.is_authenticated, redirect_field_name='')
 def register(request):
-    return HttpResponse('This is the register page.')
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+
+            messages.success(request, _('You\'ve successfully registered! Feel free to login with your credentials!'))
+
+            return redirect('accounts:login')
+    else:
+        form = RegisterForm()
+
+    return render(request, 'accounts/register.html', {
+        'form': form,
+    })
