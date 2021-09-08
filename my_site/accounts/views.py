@@ -1,8 +1,11 @@
 from django.contrib.auth.views import LoginView as BaseLoginView, LogoutView as BaseLogoutView
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from django.utils.translation import gettext_lazy as _
 
-from .forms import LoginForm
+from .forms import LoginForm, ProfileForm
 
 
 class LoginView(BaseLoginView):
@@ -16,8 +19,23 @@ class LogoutView(BaseLogoutView):
     template_name = 'accounts/logout.html'
 
 
+@login_required
 def index(request):
-    return HttpResponse('This is the profile page.')
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, instance=request.user)
+
+        if form.is_valid():
+            form.save()
+
+            messages.success(request, _('You\'ve successfully updated your profile!'))
+
+            return redirect('accounts:index')
+    else:
+        form = ProfileForm(instance=request.user)
+
+    return render(request, 'accounts/index.html', {
+        'form': form,
+    })
 
 
 def register(request):

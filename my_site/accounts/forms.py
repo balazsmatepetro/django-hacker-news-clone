@@ -2,6 +2,8 @@ from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UsernameField
 from django.utils.translation import gettext_lazy as _
 
+from .models import User
+
 
 class LoginForm(AuthenticationForm):
     username = UsernameField(
@@ -13,3 +15,20 @@ class LoginForm(AuthenticationForm):
         strip=False,
         widget=forms.PasswordInput(attrs={'autocomplete': 'current-password', 'class': 'form-control'}),
     )
+
+
+class ProfileForm(forms.ModelForm):
+    email = forms.EmailField(
+        label=_('Email'),
+        required=False,
+        widget=forms.EmailInput(attrs={'class': 'form-control'}),
+    )
+    about = forms.CharField(
+        label=_('About'),
+        required=False,
+        widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 4}),
+    )
+
+    class Meta:
+        model = User
+        fields = ('email', 'about')
