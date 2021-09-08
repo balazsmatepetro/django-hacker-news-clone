@@ -1,12 +1,21 @@
+{% load humanize %}
+
 {% if comments|length > 0 %}
-    <div class="ms-4">
+    <div class="comment-wrapper">
         {% for comment in comments %}
             <div class="card mb-4">
-                <div class="card-body">
-                    <p class="card-text mb-1">{{ comment.content }}</p>
+                <div class="card-header">
+                    <a class="card-link" href="">{{ comment.author.username }}</a>
+
+                    <a class="card-link" href="#">
+                        <!-- TODO: Add datetime attribute! -->
+                        <time>{{ comment.created_at|naturaltime }}</time>
+                    </a>
 
                     <a class="card-link" href="#">Reply</a>
                 </div>
+
+                <div class="card-body">{{ comment.content }}</div>
             </div>
 
             {% if comment.has_replies %}
