@@ -16,6 +16,6 @@
 
         <span>| hide |</span>
 
-        <a href="{% url 'news:comments' news_item.id %}">0 comments</a>
+        <a href="{% url 'news:comments' news_item.id %}">{{ news_item.get_number_of_comments }} comments</a>
     </div>
 </article>
