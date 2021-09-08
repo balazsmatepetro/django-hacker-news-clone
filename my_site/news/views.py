@@ -9,7 +9,7 @@ def index(request):
     if search_term != '':
         news = NewsItem.get_news_items_by_term(search_term=search_term)
     else:
-        news = NewsItem.objects.order_by('-created_at').all()
+        news = NewsItem.objects.all()
 
     return render(request, 'news/index.html', {
         'news': news,
