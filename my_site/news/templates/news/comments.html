@@ -5,7 +5,33 @@
 {% block content %}
     {% include 'news/partial/news_item.html' with news_item=news_item %}
 
-    <div>
-        {% include 'news/partial/comments.html' with comments=comments %}
-    </div>
+    {% if messages %}
+        <div class="mb-4">
+            {% include 'my_site/messages.html' with messages=messages %}
+        </div>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+        <div class="card mb-4">
+            <div class="card-header">Leave a comment</div>
+
+            <div class="card-body">
+                <form action="{% url 'news:comments' news_item.id %}" method="POST" novalidate>
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        {{ form.content }}
+
+                        {% if form.content.errors %}
+                            {% include 'my_site/form/field_errors.html' with errors=form.content.errors %}
+                        {% endif %}
+                    </div>
+
+                    <button class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    {% endif %}
+
+    {% include 'news/partial/comments.html' with comments=comments %}
 {% endblock %}

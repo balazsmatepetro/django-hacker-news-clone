@@ -6,7 +6,7 @@ from django.http.response import Http404
 
 from accounts.models import User
 
-from .forms import SubmitForm
+from .forms import CommentForm, SubmitForm
 from .models import NewsItem
 
 
@@ -39,8 +39,24 @@ def by_author(request, username: str):
 def comments(request, news_item_id):
     news_item = get_object_or_404(NewsItem, pk=news_item_id)
 
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+
+        if form.is_valid():
+            created_comment = form.save(commit=False)
+            created_comment.author = request.user
+            created_comment.news_item = news_item
+            created_comment.save()
+
+            messages.success(request, _('You\'ve successfully submitted your comment!'))
+
+            return redirect('news:comments', news_item_id=news_item_id)
+    else:
+        form = CommentForm()
+
     return render(request, 'news/comments.html', {
         'comments': news_item.comment_set.filter(parent=None).all(),
+        'form': form,
         'news_item': news_item,
     })
 
