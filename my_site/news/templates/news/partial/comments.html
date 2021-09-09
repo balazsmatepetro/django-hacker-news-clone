@@ -5,18 +5,19 @@
     <div class="comment-wrapper">
         {% for comment in comments %}
             <div class="card mb-4">
-                <div class="card-header">
-                    <a class="card-link"
-                       href="{% url 'accounts:details' comment.author.username %}"
-                    >{{ comment.author.username }}</a>
+                <div class="card-header d-flex align-items-center justify-content-between">
+                    <span>
+                        Written by:
+                        <a class="card-link"
+                           href="{% url 'accounts:details' comment.author.username %}"
+                        >{{ comment.author.username }}</a>
 
-                    <a class="card-link" href="#">
                         <time datetime="{{ comment.created_at|html_datetime }}">
                             {{ comment.created_at|naturaltime }}
                         </time>
-                    </a>
+                    </span>
 
-                    <a class="card-link" href="#">Reply</a>
+                    <a class="btn btn-primary btn-sm" href="#">Reply</a>
                 </div>
 
                 <div class="card-body">{{ comment.content }}</div>
