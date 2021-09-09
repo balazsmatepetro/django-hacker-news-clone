@@ -11,15 +11,22 @@ from .models import NewsItem
 
 
 def index(request):
-    search_term = request.GET.get('term', '')
+    return render(request, 'news/index.html', {
+        'news': NewsItem.objects.all(),
+    })
+
+
+def search(request):
+    search_term = request.GET.get('search_term', '')
 
     if search_term != '':
         news = NewsItem.get_news_items_by_search_term(search_term=search_term)
     else:
-        news = NewsItem.objects.all()
+        news = []
 
-    return render(request, 'news/index.html', {
+    return render(request, 'news/search.html', {
         'news': news,
+        'search_term': search_term,
     })
 
 

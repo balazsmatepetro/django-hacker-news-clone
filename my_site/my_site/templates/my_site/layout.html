@@ -57,9 +57,9 @@
                         {% endif %}
                     </ul>
 
-                    <form action="{% url 'news:index' %}" method="GET" class="d-flex">
+                    <form action="{% url 'news:search' %}" method="GET" class="d-flex">
                         <input class="form-control me-2"
-                               name="term"
+                               name="search_term"
                                type="search"
                                placeholder="Search"
                                aria-label="Search"
