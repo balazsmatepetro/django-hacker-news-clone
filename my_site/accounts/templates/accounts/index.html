@@ -10,7 +10,7 @@
     {% endif %}
 
     {% if form.non_field_errors %}
-        {% include 'accounts/partial/form_errors.html' with errors=form.non_field_errors %}
+        {% include 'my_site/form/form_errors.html' with errors=form.non_field_errors %}
     {% endif %}
 
     <div class="card">
@@ -31,7 +31,7 @@
                     {{ form.email }}
 
                     {% if form.email.errors %}
-                        {% include 'accounts/partial/field_errors.html' with errors=form.email.errors %}
+                        {% include 'my_site/form/field_errors.html' with errors=form.email.errors %}
                     {% endif %}
                 </div>
 
@@ -41,7 +41,7 @@
                     {{ form.about }}
 
                     {% if form.about.errors %}
-                        {% include 'accounts/partial/field_errors.html' with errors=form.about.errors %}
+                        {% include 'my_site/form/field_errors.html' with errors=form.about.errors %}
                     {% endif %}
                 </div>
 

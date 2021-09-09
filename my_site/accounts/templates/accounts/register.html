@@ -4,7 +4,7 @@
 
 {% block content %}
     {% if form.non_field_errors %}
-        {% include 'accounts/partial/form_errors.html' with errors=form.non_field_errors %}
+        {% include 'my_site/form/form_errors.html' with errors=form.non_field_errors %}
     {% endif %}
 
     <div class="card">
@@ -20,7 +20,7 @@
                     {{ form.username }}
 
                     {% if form.username.errors %}
-                        {% include 'accounts/partial/field_errors.html' with errors=form.username.errors %}
+                        {% include 'my_site/form/field_errors.html' with errors=form.username.errors %}
                     {% endif %}
                 </div>
 
@@ -30,7 +30,7 @@
                     {{ form.password1 }}
 
                     {% if form.password1.errors %}
-                        {% include 'accounts/partial/field_errors.html' with errors=form.password1.errors %}
+                        {% include 'my_site/form/field_errors.html' with errors=form.password1.errors %}
                     {% endif %}
                 </div>
             
@@ -40,7 +40,7 @@
                     {{ form.password2 }}
 
                     {% if form.password2.errors %}
-                        {% include 'accounts/partial/field_errors.html' with errors=form.password2.errors %}
+                        {% include 'my_site/form/field_errors.html' with errors=form.password2.errors %}
                     {% endif %}
                 </div>
 
