@@ -1,21 +1,35 @@
 {% load humanize %}
+{% load news_extras %}
 
-<article class="mb-4">
-    <a class="d-inline-block" href="{{ news_item.url }}" target="_blank">
-        <h2 class="fs-5">{{ news_item.title }}</h2>
-    </a>
+<div class="card mb-4">
+    <div class="card-header d-flex align-items-center justify-content-between">
+        <a class="card-link d-inline-block" href="{{ news_item.url }}" target="_blank">{{ news_item.title }}</a>
 
-    <div class="fs-6">
-        <span>0 points by</span>
+        <div class="d-flex flex-column flex-sm-row gap-2">
+            <a class="btn btn-primary btn-sm" href="#" title="0 points">
+                <span class="badge bg-light text-dark">0</span> points
+            </a>
 
-        <a href="{% url 'accounts:details' news_item.author.username %}">{{ news_item.author.username }}</a>
+            <a class="btn btn-primary btn-sm"
+               href="{% url 'news:comments' news_item.id %}"
+               title="{{ news_item.get_number_of_comments }} comments"
+            >
+                <span class="badge bg-light text-dark">
+                    {{ news_item.get_number_of_comments|shorten_number:100 }}
+                </span>
+                comments
+            </a>
+        </div>
+    </div>
+
+    <div class="card-body py-2">
+        <span>
+            Submitted by:
+            <a href="{% url 'accounts:details' news_item.author.username %}">{{ news_item.author.username }}</a>
+        </span>
 
         <time datetime="{{ news_item.created_at|date:"Y-m-d" }}T{{ news_item.created_at|date:"H:i:s" }}">
-            {{ news_item.created_at|naturaltime }} ago
+            {{ news_item.created_at|naturaltime }}
         </time>
-
-        <span>| hide |</span>
-
-        <a href="{% url 'news:comments' news_item.id %}">{{ news_item.get_number_of_comments }} comments</a>
     </div>
-</article>
+</div>
