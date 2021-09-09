@@ -1,4 +1,5 @@
 {% load humanize %}
+{% load news_extras %}
 
 {% if comments|length > 0 %}
     <div class="comment-wrapper">
@@ -10,8 +11,9 @@
                     >{{ comment.author.username }}</a>
 
                     <a class="card-link" href="#">
-                        <!-- TODO: Add datetime attribute! -->
-                        <time>{{ comment.created_at|naturaltime }}</time>
+                        <time datetime="{{ comment.created_at|html_datetime }}">
+                            {{ comment.created_at|naturaltime }}
+                        </time>
                     </a>
 
                     <a class="card-link" href="#">Reply</a>

@@ -28,7 +28,7 @@
             <a href="{% url 'accounts:details' news_item.author.username %}">{{ news_item.author.username }}</a>
         </span>
 
-        <time datetime="{{ news_item.created_at|date:"Y-m-d" }}T{{ news_item.created_at|date:"H:i:s" }}">
+        <time datetime="{{ news_item.created_at|html_datetime }}">
             {{ news_item.created_at|naturaltime }}
         </time>
     </div>
