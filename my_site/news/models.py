@@ -3,6 +3,8 @@ from django.utils.text import Truncator
 
 from accounts.models import User
 
+from .exceptions import IdMismatchError
+
 
 class NewsItem(models.Model):
     title = models.CharField(max_length=256)
@@ -34,6 +36,19 @@ class Comment(models.Model):
     news_item = models.ForeignKey(NewsItem, on_delete=models.CASCADE)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+
+    @staticmethod
+    def get_comment_by_id_and_news_item_id(comment_id: int, news_item_id: int):
+        comment = Comment.objects.get(pk=comment_id)
+
+        if comment.news_item.id != news_item_id:
+            raise IdMismatchError()
+
+        return comment
+
+    @staticmethod
+    def reply_to_comment(comment, author: User, content: str):
+        return comment.comment_set.create(news_item=comment.news_item, author=author, content=content)
 
     def has_replies(self):
         return self.comment_set.count() > 0

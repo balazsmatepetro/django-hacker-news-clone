@@ -1,0 +1,2 @@
+class IdMismatchError(ValueError):
+    pass

@@ -10,4 +10,5 @@ urlpatterns = [
     path('search/', views.search, name='search'),
     path('submit/', views.submit, name='submit'),
     path('<int:news_item_id>/comments/', views.comments, name='comments'),
+    path('<int:news_item_id>/comments/<int:comment_id>/reply', views.reply, name='reply'),
 ]

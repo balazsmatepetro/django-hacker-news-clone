@@ -17,7 +17,9 @@
                         </time>
                     </span>
 
-                    <a class="btn btn-primary btn-sm" href="#">Reply</a>
+                    <a class="btn btn-primary btn-sm"
+                       href="{% url 'news:reply' comment.news_item.id comment.id %}"
+                    >Reply</a>
                 </div>
 
                 <div class="card-body">{{ comment.content }}</div>

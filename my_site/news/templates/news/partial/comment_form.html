@@ -1,0 +1,13 @@
+<form action="{{ action }}" method="POST" novalidate>
+    {% csrf_token %}
+
+    <div class="mb-3">
+        {{ form.content }}
+
+        {% if form.content.errors %}
+            {% include 'my_site/form/field_errors.html' with errors=form.content.errors %}
+        {% endif %}
+    </div>
+
+    <button class="btn btn-primary">Submit</button>
+</form>

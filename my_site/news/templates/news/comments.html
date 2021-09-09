@@ -16,19 +16,7 @@
             <div class="card-header">Leave a comment</div>
 
             <div class="card-body">
-                <form action="{% url 'news:comments' news_item.id %}" method="POST" novalidate>
-                    {% csrf_token %}
-
-                    <div class="mb-3">
-                        {{ form.content }}
-
-                        {% if form.content.errors %}
-                            {% include 'my_site/form/field_errors.html' with errors=form.content.errors %}
-                        {% endif %}
-                    </div>
-
-                    <button class="btn btn-primary">Submit</button>
-                </form>
+                {% include 'news/partial/comment_form.html' with action=request.path form=form %}
             </div>
         </div>
     {% endif %}

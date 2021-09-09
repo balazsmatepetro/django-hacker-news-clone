@@ -1,0 +1,17 @@
+{% extends 'my_site/layout.html' %}
+
+{% block title %}Hacker News Clone &dash; Reply{% endblock %}
+
+{% block content %}
+    <div class="card mb-4">
+        <div class="card-body">{{ comment.content }}</div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">Reply to comment: #{{ comment.id }}</div>
+
+        <div class="card-body">
+            {% include 'news/partial/comment_form.html' with action=request.path form=form %}
+        </div>
+    </div>
+{% endblock %}

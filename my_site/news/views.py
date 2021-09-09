@@ -6,8 +6,9 @@ from django.http.response import Http404
 
 from accounts.models import User
 
+from .exceptions import IdMismatchError
 from .forms import CommentForm, SubmitForm
-from .models import NewsItem
+from .models import Comment, NewsItem
 
 
 def index(request):
@@ -66,6 +67,30 @@ def comments(request, news_item_id):
         'form': form,
         'news_item': news_item,
     })
+
+
+def reply(request, news_item_id, comment_id):
+    try:
+        comment = Comment.get_comment_by_id_and_news_item_id(comment_id=comment_id, news_item_id=news_item_id)
+
+        if request.method == 'POST':
+            form = CommentForm(request.POST)
+
+            if form.is_valid():
+                Comment.reply_to_comment(comment=comment, author=request.user, content=request.POST.get('content'))
+
+                messages.success(request, _('You\'ve successfully replied to the comment!'))
+
+                return redirect('news:comments', news_item_id=news_item_id)
+        else:
+            form = CommentForm()
+
+        return render(request, 'news/reply.html', {
+            'form': form,
+            'comment': comment,
+        })
+    except IdMismatchError:
+        raise Http404
 
 
 @login_required
