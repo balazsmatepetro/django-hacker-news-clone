@@ -2,6 +2,9 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.translation import gettext_lazy as _
+from django.http.response import Http404
+
+from accounts.models import User
 
 from .forms import SubmitForm
 from .models import NewsItem
@@ -18,6 +21,19 @@ def index(request):
     return render(request, 'news/index.html', {
         'news': news,
     })
+
+
+def by_author(request, username: str):
+    try:
+        user_data = User.get_by_username(username=username)
+        news = NewsItem.get_news_items_by_author(author=user_data)
+
+        return render(request, 'news/by_author.html', {
+            'news': news,
+            'user_data': user_data,
+        })
+    except User.DoesNotExist:
+        raise Http404
 
 
 def comments(request, news_item_id):

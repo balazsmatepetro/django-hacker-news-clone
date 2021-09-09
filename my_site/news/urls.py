@@ -6,6 +6,7 @@ app_name = 'news'
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('by/<str:username>/', views.by_author, name='by_author'),
     path('submit/', views.submit, name='submit'),
     path('<int:news_item_id>/comments/', views.comments, name='comments'),
 ]

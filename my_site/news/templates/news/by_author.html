@@ -1,0 +1,19 @@
+{% extends 'my_site/layout.html' %}
+
+{% block title %}Hacker News Clone &dash; News from {{ user_data.username }}{% endblock %}
+
+{% block content %}
+    {% if news|length > 0 %}
+        <div class="alert alert-primary mb-4">
+            You&apos;re watching the news posted by:
+            <a href="{% url 'accounts:details' user_data.username %}">{{ user_data.username }}</a>
+        </div>
+
+        {% include 'news/partial/news_item_list.html' with news=news %}
+    {% else %}
+        <div class="alert alert-info">
+            The user <a href="{% url 'accounts:details' user_data.username %}">{{ user_data.username }}</a> has not
+            submitted anything yet.
+        </div>
+    {% endif %}
+{% endblock %}

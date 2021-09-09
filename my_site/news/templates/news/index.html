@@ -11,11 +11,5 @@
         </div>
     {% endif %}
 
-    <ol>
-        {% for news_item in news %}
-            <li>
-                {% include 'news/partial/news_item.html' with news_item=news_item %}
-            </li>
-        {% endfor %}
-    </ol>
+    {% include 'news/partial/news_item_list.html' with news=news %}
 {% endblock %}

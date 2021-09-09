@@ -14,6 +14,10 @@ class NewsItem(models.Model):
         ordering = ['-created_at']
 
     @staticmethod
+    def get_news_items_by_author(author: User):
+        return NewsItem.objects.filter(author=author)
+
+    @staticmethod
     def get_news_items_by_term(search_term: str):
         return NewsItem.objects.filter(title__icontains=search_term)
 

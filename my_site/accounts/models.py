@@ -7,3 +7,7 @@ class User(AbstractUser):
 
     class Meta:
         db_table = 'auth_user'
+
+    @staticmethod
+    def get_by_username(username: str):
+        return User.objects.get(username=username)
