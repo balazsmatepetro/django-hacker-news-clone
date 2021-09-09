@@ -11,7 +11,7 @@
         <div class="card-header">Submit</div>
 
         <div class="card-body">
-            <form action="{% url 'news:create' %}" method="POST" novalidate>
+            <form action="{% url 'news:submit' %}" method="POST" novalidate>
                 {% csrf_token %}
 
                 <div class="mb-3">

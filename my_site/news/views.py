@@ -30,7 +30,7 @@ def comments(request, news_item_id):
 
 
 @login_required
-def create(request):
+def submit(request):
     if request.method == 'POST':
         form = SubmitForm(request.POST)
 
@@ -45,6 +45,6 @@ def create(request):
     else:
         form = SubmitForm()
 
-    return render(request, 'news/create.html', {
+    return render(request, 'news/submit.html', {
         'form': form,
     })

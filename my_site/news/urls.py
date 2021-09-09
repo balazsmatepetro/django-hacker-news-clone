@@ -6,6 +6,6 @@ app_name = 'news'
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('create/', views.create, name='create'),
+    path('submit/', views.submit, name='submit'),
     path('<int:news_item_id>/comments/', views.comments, name='comments'),
 ]
