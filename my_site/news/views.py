@@ -14,7 +14,7 @@ def index(request):
     search_term = request.GET.get('term', '')
 
     if search_term != '':
-        news = NewsItem.get_news_items_by_term(search_term=search_term)
+        news = NewsItem.get_news_items_by_search_term(search_term=search_term)
     else:
         news = NewsItem.objects.all()
 

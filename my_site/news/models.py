@@ -18,7 +18,7 @@ class NewsItem(models.Model):
         return NewsItem.objects.filter(author=author)
 
     @staticmethod
-    def get_news_items_by_term(search_term: str):
+    def get_news_items_by_search_term(search_term: str):
         return NewsItem.objects.filter(title__icontains=search_term)
 
     def get_number_of_comments(self):
