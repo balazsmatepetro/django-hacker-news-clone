@@ -8,7 +8,7 @@
     <div class="fs-6">
         <span>0 points by</span>
 
-        <a href="#">{{ news_item.author.username }}</a>
+        <a href="{% url 'accounts:details' news_item.author.username %}">{{ news_item.author.username }}</a>
 
         <time datetime="{{ news_item.created_at|date:"Y-m-d" }}T{{ news_item.created_at|date:"H:i:s" }}">
             {{ news_item.created_at|naturaltime }} ago

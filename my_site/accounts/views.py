@@ -1,10 +1,11 @@
 from django.contrib.auth.views import LoginView as BaseLoginView, LogoutView as BaseLogoutView
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.translation import gettext_lazy as _
 
 from .forms import LoginForm, ProfileForm, RegisterForm
+from .models import User
 
 
 class LoginView(BaseLoginView):
@@ -53,4 +54,12 @@ def register(request):
 
     return render(request, 'accounts/register.html', {
         'form': form,
+    })
+
+
+def details(request, username: str):
+    user_data = get_object_or_404(User, username=username)
+
+    return render(request, 'accounts/details.html', {
+        'user_data': user_data,
     })

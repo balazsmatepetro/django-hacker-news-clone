@@ -1,0 +1,52 @@
+{% extends 'my_site/layout.html' %}
+
+{% load humanize %}
+
+{% block title %}Hacker News Clone &dash; Profile of {{ user_data.username }}{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header">
+            <div class="d-flex align-items-center justify-content-between">
+                <span>
+                    Profile of <strong>{{ user_data.username }}</strong>
+                </span>
+
+                {% if user_data.id == user.id %}
+                    <a class="btn btn-primary btn-sm" href="{% url 'accounts:index' %}">Edit profile</a>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="row mb-2">
+                <div class="col-sm-12 col-md-2">Username:</div>
+                <div class="col-sm-12 col-md-10">{{ user_data.username }}</div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-sm-12 col-md-2">Registered at:</div>
+                <div class="col-sm-12 col-md-10">
+                    {{ user_data.date_joined }} ({{ user_data.date_joined|naturaltime }})
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-sm-12 col-md-2">About:</div>
+                <div class="col-sm-12 col-md-10">{{ user_data.about }}</div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <hr>
+
+                    <ul class="mb-0">
+                        <li>
+                            <a href="{% url 'news:by_author' user_data.username %}">Submissions</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

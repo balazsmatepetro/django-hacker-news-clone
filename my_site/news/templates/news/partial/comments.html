@@ -5,7 +5,9 @@
         {% for comment in comments %}
             <div class="card mb-4">
                 <div class="card-header">
-                    <a class="card-link" href="">{{ comment.author.username }}</a>
+                    <a class="card-link"
+                       href="{% url 'accounts:details' comment.author.username %}"
+                    >{{ comment.author.username }}</a>
 
                     <a class="card-link" href="#">
                         <!-- TODO: Add datetime attribute! -->
