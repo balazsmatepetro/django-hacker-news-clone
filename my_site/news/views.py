@@ -39,7 +39,7 @@ def by_author(request, username: str):
 def comments(request, news_item_id):
     news_item = get_object_or_404(NewsItem, pk=news_item_id)
 
-    if request.method == 'POST':
+    if request.method == 'POST' and request.user.is_authenticated:
         form = CommentForm(request.POST)
 
         if form.is_valid():
