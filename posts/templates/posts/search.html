@@ -13,7 +13,7 @@
             </div>
         </div>
 
-        {% include 'news/partial/posts.html' with posts=posts %}
+        {% include 'posts/partial/posts.html' with posts=posts %}
     {% else %}
         <div class="alert alert-primary">
             We didn't find anything that matches for: <strong>{{ search_term }}</strong>.

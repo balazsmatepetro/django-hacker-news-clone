@@ -12,7 +12,7 @@ from .models import Comment, Post
 
 
 def index(request):
-    return render(request, 'news/index.html', {
+    return render(request, 'posts/index.html', {
         'posts': Post.objects.all(),
     })
 
@@ -25,7 +25,7 @@ def search(request):
     else:
         posts = []
 
-    return render(request, 'news/search.html', {
+    return render(request, 'posts/search.html', {
         'posts': posts,
         'search_term': search_term,
     })
@@ -36,7 +36,7 @@ def by_author(request, username: str):
         user_data = User.get_by_username(username=username)
         posts = Post.get_posts_by_author(author=user_data)
 
-        return render(request, 'news/by_author.html', {
+        return render(request, 'posts/by_author.html', {
             'posts': posts,
             'user_data': user_data,
         })
@@ -62,7 +62,7 @@ def comments(request, post_id: int):
     else:
         form = CommentForm()
 
-    return render(request, 'news/comments.html', {
+    return render(request, 'posts/comments.html', {
         'comments': post.comment_set.filter(parent=None).all(),
         'form': form,
         'post': post,
@@ -85,7 +85,7 @@ def reply(request, post_id: int, comment_id: int):
         else:
             form = CommentForm()
 
-        return render(request, 'news/reply.html', {
+        return render(request, 'posts/reply.html', {
             'form': form,
             'comment': comment,
         })
@@ -109,6 +109,6 @@ def submit(request):
     else:
         form = SubmitForm()
 
-    return render(request, 'news/submit.html', {
+    return render(request, 'posts/submit.html', {
         'form': form,
     })

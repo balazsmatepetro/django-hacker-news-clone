@@ -3,7 +3,7 @@
 {% block title %}Hacker News Clone &dash; {{ post.title }}{% endblock %}
 
 {% block content %}
-    {% include 'news/partial/post.html' with post=post %}
+    {% include 'posts/partial/post.html' with post=post %}
 
     {% if messages %}
         <div class="mb-4">
@@ -16,10 +16,10 @@
             <div class="card-header">Leave a comment</div>
 
             <div class="card-body">
-                {% include 'news/partial/comment_form.html' with action=request.path form=form %}
+                {% include 'posts/partial/comment_form.html' with action=request.path form=form %}
             </div>
         </div>
     {% endif %}
 
-    {% include 'news/partial/comments.html' with comments=comments %}
+    {% include 'posts/partial/comments.html' with comments=comments %}
 {% endblock %}

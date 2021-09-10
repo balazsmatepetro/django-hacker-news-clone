@@ -26,7 +26,7 @@
             </div>
 
             {% if comment.has_replies %}
-                {% include 'news/partial/comments.html' with comments=comment.get_replies %}
+                {% include 'posts/partial/comments.html' with comments=comment.get_replies %}
             {% endif %}
         {% endfor %}
     </div>

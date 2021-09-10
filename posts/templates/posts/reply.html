@@ -11,7 +11,7 @@
         <div class="card-header">Reply to comment: #{{ comment.id }}</div>
 
         <div class="card-body">
-            {% include 'news/partial/comment_form.html' with action=request.path form=form %}
+            {% include 'posts/partial/comment_form.html' with action=request.path form=form %}
         </div>
     </div>
 {% endblock %}
