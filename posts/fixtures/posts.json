@@ -1,0 +1,92 @@
+[
+  {
+    "model": "posts.Post",
+    "pk": 1,
+    "fields": {
+      "title": "Django project to create a Comments System",
+      "url": "https://www.geeksforgeeks.org/django-project-to-create-a-comments-system/",
+      "created_at": "2021-09-07 14:10:50.763447",
+      "author_id": 1
+    }
+  },
+  {
+    "model": "posts.Post",
+    "pk": 2,
+    "fields": {
+      "title": "How to Get Started with Automated Email Marketing",
+      "url": "https://www.sitepoint.com/automated-email-marketing-getting-started/",
+      "created_at": "2021-09-07 14:29:45.831973",
+      "author_id": 1
+    }
+  },
+  {
+    "model": "posts.Post",
+    "pk": 3,
+    "fields": {
+      "title": "7 of the Best Code Playgrounds",
+      "url": "https://www.sitepoint.com/7-code-playgrounds/",
+      "created_at": "2021-09-07 14:30:08.989207",
+      "author_id": 1
+    }
+  },
+  {
+    "model": "posts.Post",
+    "pk": 4,
+    "fields": {
+      "title": "10 Free Browser Extensions for a More Efficient SEO Workflow",
+      "url": "https://www.sitepoint.com/free-seo-browser-extensions/",
+      "created_at": "2021-09-07 14:30:46.050650",
+      "author_id": 1
+    }
+  },
+  {
+    "model": "posts.Post",
+    "pk": 6,
+    "fields": {
+      "title": "Flexible API Design: Create Hooks for Your PHP API Pipeline",
+      "url": "https://www.sitepoint.com/flexible-api-design-create-hooks-for-php-api-pipeline/",
+      "created_at": "2021-09-08 20:21:37.450825",
+      "author_id": 1
+    }
+  },
+  {
+    "model": "posts.Post",
+    "pk": 7,
+    "fields": {
+      "title": "How to Get Started with Automated Email Marketing",
+      "url": "https://www.sitepoint.com/automated-email-marketing-getting-started/",
+      "created_at": "2021-09-08 20:23:57.206270",
+      "author_id": 1
+    }
+  },
+  {
+    "model": "posts.Post",
+    "pk": 8,
+    "fields": {
+      "title": "A Practical Guide to Creating Reusable React Components",
+      "url": "https://www.sitepoint.com/creating-reusable-react-components/",
+      "created_at": "2021-09-08 20:24:28.923041",
+      "author_id": 1
+    }
+  },
+  {
+    "model": "posts.Post",
+    "pk": 9,
+    "fields": {
+      "title": "A Beginner\u2019s Guide to Lighthouse",
+      "url": "https://www.sitepoint.com/lighthouse-beginners-guide/",
+      "created_at": "2021-09-08 20:29:07.595515",
+      "author_id": 1
+    }
+  },
+  {
+    "model": "posts.Post",
+    "pk": 10,
+    "fields": {
+      "title": "How JavaScript Works [Visually Explained]",
+      "url": "https://dev.to/narottam04/how-javascript-works-visually-explained-269j",
+      "created_at": "2021-09-10 10:13:17.880468",
+      "author_id": 1
+    }
+  }
+]
