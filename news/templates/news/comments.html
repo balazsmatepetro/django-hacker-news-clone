@@ -1,9 +1,9 @@
 {% extends 'my_site/layout.html' %}
 
-{% block title %}Hacker News Clone &dash; {{ news_item.title }}{% endblock %}
+{% block title %}Hacker News Clone &dash; {{ post.title }}{% endblock %}
 
 {% block content %}
-    {% include 'news/partial/news_item.html' with news_item=news_item %}
+    {% include 'news/partial/news_item.html' with post=post %}
 
     {% if messages %}
         <div class="mb-4">

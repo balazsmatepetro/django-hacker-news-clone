@@ -9,6 +9,6 @@ urlpatterns = [
     path('by/<str:username>/', views.by_author, name='by_author'),
     path('search/', views.search, name='search'),
     path('submit/', views.submit, name='submit'),
-    path('<int:news_item_id>/comments/', views.comments, name='comments'),
-    path('<int:news_item_id>/comments/<int:comment_id>/reply', views.reply, name='reply'),
+    path('<int:post_id>/comments/', views.comments, name='comments'),
+    path('<int:post_id>/comments/<int:comment_id>/reply', views.reply, name='reply'),
 ]

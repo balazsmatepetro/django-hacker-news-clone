@@ -1,7 +1,7 @@
 <ol class="list-unstyled">
-    {% for news_item in news %}
+    {% for post in posts %}
         <li>
-            {% include 'news/partial/news_item.html' with news_item=news_item %}
+            {% include 'news/partial/news_item.html' with post=post %}
         </li>
     {% endfor %}
 </ol>

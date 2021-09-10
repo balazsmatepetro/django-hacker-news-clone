@@ -16,11 +16,11 @@ class Post(models.Model):
         ordering = ['-created_at']
 
     @staticmethod
-    def get_news_items_by_author(author: User):
+    def get_posts_by_author(author: User):
         return Post.objects.filter(author=author)
 
     @staticmethod
-    def get_news_items_by_search_term(search_term: str):
+    def get_posts_by_search_term(search_term: str):
         return Post.objects.filter(title__icontains=search_term)
 
     def get_number_of_comments(self):
@@ -38,17 +38,17 @@ class Comment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     @staticmethod
-    def get_comment_by_id_and_news_item_id(comment_id: int, news_item_id: int):
+    def get_comment_by_id_and_post_id(comment_id: int, post_id: int):
         comment = Comment.objects.get(pk=comment_id)
 
-        if comment.post.id != news_item_id:
+        if comment.post.id != post_id:
             raise IdMismatchError()
 
         return comment
 
     @staticmethod
     def reply_to_comment(comment, author: User, content: str):
-        return comment.comment_set.create(news_item=comment.post, author=author, content=content)
+        return comment.comment_set.create(post=comment.post, author=author, content=content)
 
     def has_replies(self):
         return self.comment_set.count() > 0

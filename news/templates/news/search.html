@@ -3,17 +3,17 @@
 {% block title %}Hacker News Clone &dash; Search{% endblock %}
 
 {% block content %}
-    {% if news|length > 0 %}
+    {% if posts|length > 0 %}
         <div class="mb-4">
             <div class="alert alert-primary">
-                {% with total=news|length %}
+                {% with total=posts|length %}
                     We found <strong>{{ total }}</strong> result{{ total|pluralize }} for the following:
                     <strong>{{ search_term }}</strong>.
                 {% endwith %}
             </div>
         </div>
 
-        {% include 'news/partial/news_item_list.html' with news=news %}
+        {% include 'news/partial/news_item_list.html' with posts=posts %}
     {% else %}
         <div class="alert alert-primary">
             We didn't find anything that matches for: <strong>{{ search_term }}</strong>.

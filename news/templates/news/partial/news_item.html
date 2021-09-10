@@ -3,7 +3,7 @@
 
 <div class="card mb-4">
     <div class="card-header d-flex align-items-center justify-content-between">
-        <a class="card-link d-inline-block" href="{{ news_item.url }}" target="_blank">{{ news_item.title }}</a>
+        <a class="card-link d-inline-block" href="{{ post.url }}" target="_blank">{{ post.title }}</a>
 
         <div class="d-flex flex-column flex-sm-row gap-2">
             <a class="btn btn-primary btn-sm" href="#" title="0 points">
@@ -11,11 +11,11 @@
             </a>
 
             <a class="btn btn-primary btn-sm"
-               href="{% url 'news:comments' news_item.id %}"
-               title="{{ news_item.get_number_of_comments }} comments"
+               href="{% url 'news:comments' post.id %}"
+               title="{{ post.get_number_of_comments }} comments"
             >
                 <span class="badge bg-light text-dark">
-                    {{ news_item.get_number_of_comments|shorten_number:100 }}
+                    {{ post.get_number_of_comments|shorten_number:100 }}
                 </span>
                 comments
             </a>
@@ -25,11 +25,11 @@
     <div class="card-body py-2">
         <span>
             Submitted by:
-            <a href="{% url 'accounts:details' news_item.author.username %}">{{ news_item.author.username }}</a>
+            <a href="{% url 'accounts:details' post.author.username %}">{{ post.author.username }}</a>
         </span>
 
-        <time datetime="{{ news_item.created_at|html_datetime }}">
-            {{ news_item.created_at|naturaltime }}
+        <time datetime="{{ post.created_at|html_datetime }}">
+            {{ post.created_at|naturaltime }}
         </time>
     </div>
 </div>

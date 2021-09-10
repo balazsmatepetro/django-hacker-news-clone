@@ -13,7 +13,7 @@ from .models import Comment, Post
 
 def index(request):
     return render(request, 'news/index.html', {
-        'news': Post.objects.all(),
+        'posts': Post.objects.all(),
     })
 
 
@@ -21,12 +21,12 @@ def search(request):
     search_term = request.GET.get('search_term', '')
 
     if search_term != '':
-        news = Post.get_news_items_by_search_term(search_term=search_term)
+        posts = Post.get_posts_by_search_term(search_term=search_term)
     else:
-        news = []
+        posts = []
 
     return render(request, 'news/search.html', {
-        'news': news,
+        'posts': posts,
         'search_term': search_term,
     })
 
@@ -34,18 +34,18 @@ def search(request):
 def by_author(request, username: str):
     try:
         user_data = User.get_by_username(username=username)
-        news = Post.get_news_items_by_author(author=user_data)
+        posts = Post.get_posts_by_author(author=user_data)
 
         return render(request, 'news/by_author.html', {
-            'news': news,
+            'posts': posts,
             'user_data': user_data,
         })
     except User.DoesNotExist:
         raise Http404
 
 
-def comments(request, news_item_id):
-    news_item = get_object_or_404(Post, pk=news_item_id)
+def comments(request, post_id: int):
+    post = get_object_or_404(Post, pk=post_id)
 
     if request.method == 'POST' and request.user.is_authenticated:
         form = CommentForm(request.POST)
@@ -53,25 +53,25 @@ def comments(request, news_item_id):
         if form.is_valid():
             created_comment = form.save(commit=False)
             created_comment.author = request.user
-            created_comment.post = news_item
+            created_comment.post = post
             created_comment.save()
 
             messages.success(request, _('You\'ve successfully submitted your comment!'))
 
-            return redirect('news:comments', news_item_id=news_item_id)
+            return redirect('news:comments', post_id=post_id)
     else:
         form = CommentForm()
 
     return render(request, 'news/comments.html', {
-        'comments': news_item.comment_set.filter(parent=None).all(),
+        'comments': post.comment_set.filter(parent=None).all(),
         'form': form,
-        'news_item': news_item,
+        'post': post,
     })
 
 
-def reply(request, news_item_id, comment_id):
+def reply(request, post_id: int, comment_id: int):
     try:
-        comment = Comment.get_comment_by_id_and_news_item_id(comment_id=comment_id, news_item_id=news_item_id)
+        comment = Comment.get_comment_by_id_and_post_id(comment_id=comment_id, post_id=post_id)
 
         if request.method == 'POST':
             form = CommentForm(request.POST)
@@ -81,7 +81,7 @@ def reply(request, news_item_id, comment_id):
 
                 messages.success(request, _('You\'ve successfully replied to the comment!'))
 
-                return redirect('news:comments', news_item_id=news_item_id)
+                return redirect('news:comments', post_id=post_id)
         else:
             form = CommentForm()
 

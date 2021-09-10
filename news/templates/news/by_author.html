@@ -3,13 +3,13 @@
 {% block title %}Hacker News Clone &dash; News from {{ user_data.username }}{% endblock %}
 
 {% block content %}
-    {% if news|length > 0 %}
+    {% if posts|length > 0 %}
         <div class="alert alert-primary mb-4">
             You&apos;re watching the news posted by:
             <a href="{% url 'accounts:details' user_data.username %}">{{ user_data.username }}</a>
         </div>
 
-        {% include 'news/partial/news_item_list.html' with news=news %}
+        {% include 'news/partial/news_item_list.html' with posts=posts %}
     {% else %}
         <div class="alert alert-info">
             The user <a href="{% url 'accounts:details' user_data.username %}">{{ user_data.username }}</a> has not
