@@ -17,7 +17,7 @@
     <body>
         <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
             <div class="container-fluid">
-                <a class="navbar-brand" href="{% url 'news:index' %}">
+                <a class="navbar-brand" href="{% url 'posts:index' %}">
                     LOGO
                 </a>
 
@@ -35,11 +35,11 @@
                 <div class="collapse navbar-collapse" id="navbar-collapse">
                     <ul class="navbar-nav me-auto mb-2 mb-md-0">
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'news:index' %}">News</a>
+                            <a class="nav-link" href="{% url 'posts:index' %}">News</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'news:submit' %}">Submit</a>
+                            <a class="nav-link" href="{% url 'posts:submit' %}">Submit</a>
                         </li>
 
                         {% if user.is_authenticated %}
@@ -57,7 +57,7 @@
                         {% endif %}
                     </ul>
 
-                    <form action="{% url 'news:search' %}" method="GET" class="d-flex">
+                    <form action="{% url 'posts:search' %}" method="GET" class="d-flex">
                         <input class="form-control me-2"
                                name="search_term"
                                type="search"

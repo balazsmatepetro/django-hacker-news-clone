@@ -11,7 +11,7 @@
             </a>
 
             <a class="btn btn-primary btn-sm"
-               href="{% url 'news:comments' post.id %}"
+               href="{% url 'posts:comments' post.id %}"
                title="{{ post.get_number_of_comments }} comments"
             >
                 <span class="badge bg-light text-dark">

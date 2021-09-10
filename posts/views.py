@@ -58,7 +58,7 @@ def comments(request, post_id: int):
 
             messages.success(request, _('You\'ve successfully submitted your comment!'))
 
-            return redirect('news:comments', post_id=post_id)
+            return redirect('posts:comments', post_id=post_id)
     else:
         form = CommentForm()
 
@@ -81,7 +81,7 @@ def reply(request, post_id: int, comment_id: int):
 
                 messages.success(request, _('You\'ve successfully replied to the comment!'))
 
-                return redirect('news:comments', post_id=post_id)
+                return redirect('posts:comments', post_id=post_id)
         else:
             form = CommentForm()
 
@@ -105,7 +105,7 @@ def submit(request):
 
             messages.success(request, _('You\'ve successfully submitted a post!'))
 
-            return redirect('news:index')
+            return redirect('posts:index')
     else:
         form = SubmitForm()
 
