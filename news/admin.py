@@ -13,7 +13,7 @@ class CommentAdmin(admin.ModelAdmin):
 
     @staticmethod
     def show_news_item(obj: Comment):
-        return Truncator(obj.news_item.title).chars(32)
+        return Truncator(obj.post.title).chars(32)
 
 
 class NewsItemAdmin(admin.ModelAdmin):

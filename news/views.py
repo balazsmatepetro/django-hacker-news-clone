@@ -53,7 +53,7 @@ def comments(request, news_item_id):
         if form.is_valid():
             created_comment = form.save(commit=False)
             created_comment.author = request.user
-            created_comment.news_item = news_item
+            created_comment.post = news_item
             created_comment.save()
 
             messages.success(request, _('You\'ve successfully submitted your comment!'))

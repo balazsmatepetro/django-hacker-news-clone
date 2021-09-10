@@ -33,7 +33,7 @@ class Post(models.Model):
 class Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
-    news_item = models.ForeignKey(Post, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -41,14 +41,14 @@ class Comment(models.Model):
     def get_comment_by_id_and_news_item_id(comment_id: int, news_item_id: int):
         comment = Comment.objects.get(pk=comment_id)
 
-        if comment.news_item.id != news_item_id:
+        if comment.post.id != news_item_id:
             raise IdMismatchError()
 
         return comment
 
     @staticmethod
     def reply_to_comment(comment, author: User, content: str):
-        return comment.comment_set.create(news_item=comment.news_item, author=author, content=content)
+        return comment.comment_set.create(news_item=comment.post, author=author, content=content)
 
     def has_replies(self):
         return self.comment_set.count() > 0
