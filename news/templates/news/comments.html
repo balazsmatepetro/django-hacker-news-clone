@@ -3,7 +3,7 @@
 {% block title %}Hacker News Clone &dash; {{ post.title }}{% endblock %}
 
 {% block content %}
-    {% include 'news/partial/news_item.html' with post=post %}
+    {% include 'news/partial/post.html' with post=post %}
 
     {% if messages %}
         <div class="mb-4">
