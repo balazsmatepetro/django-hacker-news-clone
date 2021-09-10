@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.text import Truncator
 
-from .models import Comment, NewsItem
+from .models import Comment, Post
 
 
 class CommentAdmin(admin.ModelAdmin):
@@ -21,4 +21,4 @@ class NewsItemAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Comment, CommentAdmin)
-admin.site.register(NewsItem, NewsItemAdmin)
+admin.site.register(Post, NewsItemAdmin)

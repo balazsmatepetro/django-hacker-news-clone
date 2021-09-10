@@ -8,12 +8,12 @@ from accounts.models import User
 
 from .exceptions import IdMismatchError
 from .forms import CommentForm, SubmitForm
-from .models import Comment, NewsItem
+from .models import Comment, Post
 
 
 def index(request):
     return render(request, 'news/index.html', {
-        'news': NewsItem.objects.all(),
+        'news': Post.objects.all(),
     })
 
 
@@ -21,7 +21,7 @@ def search(request):
     search_term = request.GET.get('search_term', '')
 
     if search_term != '':
-        news = NewsItem.get_news_items_by_search_term(search_term=search_term)
+        news = Post.get_news_items_by_search_term(search_term=search_term)
     else:
         news = []
 
@@ -34,7 +34,7 @@ def search(request):
 def by_author(request, username: str):
     try:
         user_data = User.get_by_username(username=username)
-        news = NewsItem.get_news_items_by_author(author=user_data)
+        news = Post.get_news_items_by_author(author=user_data)
 
         return render(request, 'news/by_author.html', {
             'news': news,
@@ -45,7 +45,7 @@ def by_author(request, username: str):
 
 
 def comments(request, news_item_id):
-    news_item = get_object_or_404(NewsItem, pk=news_item_id)
+    news_item = get_object_or_404(Post, pk=news_item_id)
 
     if request.method == 'POST' and request.user.is_authenticated:
         form = CommentForm(request.POST)

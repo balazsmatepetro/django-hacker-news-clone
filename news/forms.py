@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
 
-from .models import Comment, NewsItem
+from .models import Comment, Post
 
 
 class CommentForm(forms.ModelForm):
@@ -29,5 +29,5 @@ class SubmitForm(forms.ModelForm):
     )
 
     class Meta:
-        model = NewsItem
+        model = Post
         fields = ('title', 'url')

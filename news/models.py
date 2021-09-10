@@ -6,7 +6,7 @@ from accounts.models import User
 from .exceptions import IdMismatchError
 
 
-class NewsItem(models.Model):
+class Post(models.Model):
     title = models.CharField(max_length=256)
     url = models.URLField(max_length=2000)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -17,11 +17,11 @@ class NewsItem(models.Model):
 
     @staticmethod
     def get_news_items_by_author(author: User):
-        return NewsItem.objects.filter(author=author)
+        return Post.objects.filter(author=author)
 
     @staticmethod
     def get_news_items_by_search_term(search_term: str):
-        return NewsItem.objects.filter(title__icontains=search_term)
+        return Post.objects.filter(title__icontains=search_term)
 
     def get_number_of_comments(self):
         return self.comment_set.count()
@@ -33,7 +33,7 @@ class NewsItem(models.Model):
 class Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
-    news_item = models.ForeignKey(NewsItem, on_delete=models.CASCADE)
+    news_item = models.ForeignKey(Post, on_delete=models.CASCADE)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
